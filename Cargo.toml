@@ -1,0 +1,39 @@
+[workspace]
+members = [
+    "crates/cone-store",
+    "crates/coned",
+    "crates/cone-p11",
+    "crates/cone-cli",
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+repository = "https://github.com/shuasimodo/traffic-cone"
+rust-version = "1.78"
+
+[workspace.dependencies]
+tokio      = { version = "1", features = ["full"] }
+aes-gcm    = "0.10"
+argon2     = "0.5"
+sha2       = "0.10"
+zeroize    = { version = "1", features = ["derive"] }
+p256       = { version = "0.13", features = ["ecdsa"] }
+rsa        = "0.9"
+rand       = "0.8"
+serde      = { version = "1", features = ["derive"] }
+serde_json = "1"
+hex        = "0.4"
+base64     = "0.22"
+rusqlite   = { version = "0.31", features = ["sqlcipher", "bundled"] }
+pkcs12     = "0.1"
+pkcs8      = { version = "0.10", features = ["pem"] }
+x509-cert  = "0.2"
+pem        = "3"
+cryptoki   = "0.7"
+thiserror  = "1"
+anyhow     = "1"
+tracing    = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }

@@ -1,0 +1,5 @@
+/target
+*.cone
+*.db
+*.db.salt
+Cargo.lock.bak
