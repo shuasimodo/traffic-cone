@@ -1,0 +1,20 @@
+[Unit]
+Description=Traffic Cone credential daemon
+Documentation=https://github.com/shuasimodo/traffic-cone
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/libexec/coned
+Restart=on-failure
+RestartSec=5
+
+# Harden the service unit as well
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=%h/.local/share/cone %t/cone
+
+[Install]
+WantedBy=default.target

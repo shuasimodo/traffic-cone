@@ -1,0 +1,5 @@
+# p11-kit module registration for Traffic Cone
+# Install to: /usr/share/p11-kit/modules/cone.module
+
+module: /usr/lib64/cone/libcone.so
+managed: yes

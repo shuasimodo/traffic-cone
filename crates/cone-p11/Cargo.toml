@@ -1,0 +1,15 @@
+[package]
+name    = "cone-p11"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+name  = "cone"
+crate-type = ["cdylib"]   # produces libcone.so
+
+[dependencies]
+cryptoki  = { workspace = true }
+anyhow    = { workspace = true }
+tracing   = { workspace = true }
+zeroize   = { workspace = true }
