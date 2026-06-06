@@ -1,6 +1,6 @@
 # Traffic Cone
 
-**Encrypted credential manager for Linux — mTLS client certificates, CA trust, and SSH keys.**
+**Encrypted credential manager for Linux: mTLS client certificates, SSL certificate trust management, and SSH keys.**
 
 Traffic Cone fills a gap that has existed in the Linux desktop for a long time: the ability to manage all of your infrastructure credentials in one encrypted store and have them automatically presented by any application — browsers, desktop apps, CLI tools, Electron apps — without configuring each one individually.
 
