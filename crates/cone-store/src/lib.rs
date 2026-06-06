@@ -36,6 +36,7 @@ pub mod import;
 pub mod integrity;
 pub mod models;
 pub mod store;
+pub mod list;
 
 pub use error::StoreError;
 pub use store::Store;
