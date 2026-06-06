@@ -31,6 +31,7 @@ rusqlite       = { version = "0.31", features = ["sqlcipher", "bundled"] }
 p12-keystore   = "0.2"
 pkcs12         = "0.1"
 pkcs8          = { version = "0.10", features = ["pem"] }
+age            = { version = "0.10", features = ["armor"] }
 x509-cert      = "0.2"
 pem            = "3"
 cryptoki       = "0.7"
