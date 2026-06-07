@@ -16,7 +16,7 @@ use anyhow::{bail, Result};
 use cone_store::list::resolve_route;
 use cone_store::Store;
 
-use crate::process_monitor::{Connection, ProcessEntry, ProcessMonitor};
+use crate::process_monitor::{ProcessEntry, ProcessMonitor};
 
 /// The result of a successful route resolution.
 #[derive(Debug, Clone)]

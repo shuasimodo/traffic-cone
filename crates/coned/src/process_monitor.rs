@@ -10,7 +10,6 @@
 
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
-use std::time::{SystemTime, UNIX_EPOCH};
 
 use anyhow::{bail, Result};
 use sha2::{Digest, Sha256};

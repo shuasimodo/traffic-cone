@@ -9,6 +9,7 @@ name = "coned"
 path = "src/main.rs"
 
 [dependencies]
+libc       = "0.2"
 cone-store = { path = "../cone-store" }
 tokio      = { workspace = true }
 anyhow     = { workspace = true }
@@ -19,6 +20,9 @@ serde      = { workspace = true }
 serde_json = { workspace = true }
 hex        = { workspace = true }
 sha2       = { workspace = true }
+p256       = { workspace = true }
+rsa        = { workspace = true }
+pkcs8      = { workspace = true }
 
 [target.'cfg(target_os = "linux")'.dependencies]
 nix = { version = "0.29", features = ["process", "ptrace", "signal", "mman", "user"] }
