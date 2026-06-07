@@ -11,6 +11,11 @@ use crate::{error::StoreError, models::IntegrityRecord, store::Store};
 /// The components Traffic Cone verifies.
 pub const COMPONENTS: &[&str] = &["coned", "libcone.so", "cone"];
 
+/// Hash a file at a given path — public wrapper for use by cone-cli.
+pub fn hash_file_path(path: &str) -> Result<String, crate::error::StoreError> {
+    crate::crypto::hash_file(path)
+}
+
 /// Record binary hashes at install time.
 /// Called by the RPM post-install scriptlet via `cone verify --record`.
 pub fn record(store: &Store, component: &str, path: &str, version: &str) -> Result<(), StoreError> {

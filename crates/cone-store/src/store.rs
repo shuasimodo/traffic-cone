@@ -98,6 +98,16 @@ impl Store {
             Ok(salt.to_vec())
         }
     }
+    /// Execute a raw SQL statement — available to cone-cli for operations
+    /// not yet wrapped in dedicated functions.
+    pub fn execute(
+        &self,
+        sql: &str,
+        params: impl rusqlite::Params,
+    ) -> Result<usize, StoreError> {
+        Ok(self.conn()?.execute(sql, params)?)
+    }
+    
 }
 
 impl Drop for Store {
@@ -106,3 +116,4 @@ impl Drop for Store {
         self.lock();
     }
 }
+
