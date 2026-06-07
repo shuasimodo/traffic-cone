@@ -9,7 +9,9 @@ name  = "cone"
 crate-type = ["cdylib"]   # produces libcone.so
 
 [dependencies]
-cryptoki  = { workspace = true }
-anyhow    = { workspace = true }
-tracing   = { workspace = true }
-zeroize   = { workspace = true }
+serde      = { workspace = true }
+serde_json = { workspace = true }
+cryptoki   = { workspace = true }
+anyhow     = { workspace = true }
+tracing    = { workspace = true }
+zeroize    = { workspace = true }

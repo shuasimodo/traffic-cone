@@ -466,6 +466,8 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "cryptoki",
+ "serde",
+ "serde_json",
  "tracing",
  "zeroize",
 ]

@@ -2,18 +2,22 @@
 //!
 //! Compiled as a cdylib: libcone.so
 //!
-//! This module is intentionally thin. Its only job is to expose a
-//! spec-compliant PKCS#11 C ABI and forward all meaningful operations
-//! to coned over an abstract Unix socket.
+//! This module implements the minimum PKCS#11 surface required for
+//! TLS client certificate authentication:
 //!
-//! Private key material never enters this crate.
-//! All signing operations are performed inside coned.
-//! This module receives only signatures.
-
-// PKCS#11 requires specific C-ABI entry points.
-// The cryptoki crate provides the type definitions.
-// Full implementation is TODO — stubs return CKR_OK or
-// CKR_FUNCTION_NOT_SUPPORTED as appropriate.
+//! - C_Initialize / C_Finalize       — connect to / disconnect from coned
+//! - C_GetInfo / C_GetSlotList       — module and slot discovery
+//! - C_GetSlotInfo / C_GetTokenInfo  — token metadata
+//! - C_OpenSession / C_CloseSession  — session lifecycle
+//! - C_FindObjectsInit/FindObjects   — certificate enumeration
+//! - C_GetAttributeValue             — read cert/key attributes
+//! - C_SignInit / C_Sign             — signing operations (the core)
+//!
+//! Everything else returns CKR_FUNCTION_NOT_SUPPORTED.
+//!
+//! The TLS stack (GnuTLS/NSS/OpenSSL) calls these functions during
+//! a TLS handshake when the server sends a CertificateRequest.
+//! We find the matching cert via coned and return a signature.
 
 mod ipc;
 mod pkcs11_impl;
