@@ -321,6 +321,39 @@ fn read_u32(cursor: &mut std::io::Cursor<&[u8]>) -> Result<u32> {
 
 /// Bind an abstract Unix socket.
 fn bind_abstract_socket(name: &str) -> Result<UnixListener> {
-    UnixListener::bind(name)
-        .map_err(|e| anyhow::anyhow!("failed to bind SSH agent socket: {}", e))
+    use std::os::unix::io::FromRawFd;
+    use std::mem;
+
+    unsafe {
+        let fd = libc::socket(libc::AF_UNIX, libc::SOCK_STREAM, 0);
+        if fd < 0 {
+            bail!("socket() failed");
+        }
+
+        let mut addr: libc::sockaddr_un = mem::zeroed();
+        addr.sun_family = libc::AF_UNIX as libc::sa_family_t;
+
+        // Abstract socket: first byte is null, rest is the name
+        let name_bytes = name.as_bytes();
+        addr.sun_path[0] = 0;
+        for (i, &b) in name_bytes.iter().enumerate() {
+            addr.sun_path[i + 1] = b as libc::c_char;
+        }
+
+        // Length includes the null byte + name length
+        let addr_len = (mem::size_of::<libc::sa_family_t>() + 1 + name_bytes.len())
+            as libc::socklen_t;
+
+        if libc::bind(fd, &addr as *const _ as *const libc::sockaddr, addr_len) < 0 {
+            libc::close(fd);
+            bail!("bind() failed on abstract socket");
+        }
+
+        if libc::listen(fd, 128) < 0 {
+            libc::close(fd);
+            bail!("listen() failed");
+        }
+
+        Ok(UnixListener::from_raw_fd(fd))
+    }
 }
